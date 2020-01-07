@@ -35,6 +35,10 @@ def auto_idiom(w: str):
                 if tail_words := results[list(results.keys())[-1]]:  # 处理无法接龙，新词重来
                     w = tail_words.pop()
                     continue
+                else:
+                    results.popitem()
+                    w = results[list(results.keys())[-1]].pop()
+                    continue
             print(f"{w=}")
             print(f"{results.keys()=}")
             w = words[-1]  # new word
