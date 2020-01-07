@@ -1,5 +1,6 @@
 import json
 from collections import OrderedDict
+from random import choice
 
 
 def load_idioms():
@@ -9,6 +10,7 @@ def load_idioms():
 
 
 idioms = load_idioms()
+idiom_words = {i['word'] for i in idioms}
 
 
 def get_match_idioms(word: str):
@@ -35,6 +37,12 @@ def get_word(res: OrderedDict):
 # 3. 无法查询后退 ok
 # 4. 重复词处理 ok
 # 5. 最长备份 not
+
+def query_idiom():
+    w = input('请输入成语：')
+    return get_match_idioms(w)
+
+
 def auto_idiom(w: str = '啊一', limit: int = 1000):
     results = OrderedDict()
     for i in range(limit):
@@ -51,6 +59,33 @@ def auto_idiom(w: str = '啊一', limit: int = 1000):
     return results.keys()
 
 
+def interact_user(is_start=True):
+    pc_idiom, count = '', -1
+    while True:
+        user_idiom = input('请输入成语：')
+        if not is_start:
+            if user_idiom[0] != pc_idiom[-1] or user_idiom not in idiom_words:
+                print(f'你答错了,当前分数：{count}')
+                continue
+        if match_words := get_match_idioms(user_idiom):
+            count += 1
+            pc_idiom = choice(match_words)
+            print(f"我的接龙：--{pc_idiom}--")
+            print("轮到你了：")
+        else:
+            print(f'恭喜你，你赢了! 当前分数：{count}')
+            break
+        is_start = False
+
+
 if __name__ == '__main__':
-    for i in auto_idiom():
-        print(i)
+    choices = ['1 成语接龙', '2 查询成语', '3 自动接龙']
+    user_choice = int(input(rf"{' '.join(choices)} (1/2/3):"))
+    if user_choice == 1:
+        interact_user()
+    elif user_choice == 2:
+        print(query_idiom())
+    elif user_choice == 3:
+        print(auto_idiom())
+    else:
+        print('无此选项，请输入 1/2/3')
