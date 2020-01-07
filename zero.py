@@ -31,10 +31,10 @@ def get_word(res: OrderedDict):
 
 
 # 1. 运行 ok
-# 2. 错误检查
+# 2. 错误检查 not
 # 3. 无法查询后退 ok
 # 4. 重复词处理 ok
-# 5. 最长备份
+# 5. 最长备份 not
 def auto_idiom(w: str = '啊一', limit: int = 1000):
     results = OrderedDict()
     for i in range(limit):
