@@ -79,13 +79,14 @@ def interact_user(is_start=True):
 
 
 if __name__ == '__main__':
-    choices = ['1 成语接龙', '2 查询成语', '3 自动接龙']
-    user_choice = int(input(rf"{' '.join(choices)} (1/2/3):"))
-    if user_choice == 1:
-        interact_user()
-    elif user_choice == 2:
-        print(query_idiom())
-    elif user_choice == 3:
-        print(auto_idiom())
-    else:
-        print('无此选项，请输入 1/2/3')
+    while True:
+        choices = ['1 成语接龙', '2 查询成语', '3 自动接龙']
+        user_choice = int(input(rf"{' '.join(choices)} (1/2/3):"))
+        if user_choice == 1:
+            interact_user()
+        elif user_choice == 2:
+            print(query_idiom())
+        elif user_choice == 3:
+            print(auto_idiom())
+        else:
+            print('无此选项，请输入 1/2/3')
